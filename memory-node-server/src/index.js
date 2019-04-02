@@ -12,7 +12,7 @@ app.use(express.json());
 
 // port sur lequel le serveur va écouter.
 //
-const port = process.env.PORT | 4000;
+const port = process.env.PORT || 4000;
 
 // Création de notre instance de notre classe gérant les scores.
 //
@@ -36,7 +36,11 @@ app.get('/',(req, res) => {
 // Route permettant de récupérer les "max" meilleurs scores (par défaut 10 si le paramètre "max" n'est pas renseigné.
 //
 app.get('/highest', (req, res) => {
-  const { max } = req.query | 10;
+  console.log(req.query);
+
+  const max = req.query.max || 10;
+
+  console.log(max);
 
   highScores.getHighestScores(max).then((result) => {
     res.json(result);
