@@ -1,0 +1,78 @@
+.card {
+  background-color: lightgray;
+
+
+  .card__content {
+    position: relative;
+
+    display: block;
+
+    width: 100px;
+    height: 150px;
+
+    border: 5px solid lightgray;
+
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+
+    // On empèche le rendu de la face de la carte qui est retournée.
+    //
+    .card__back,
+    .card__front {
+      backface-visibility: hidden;
+    }
+
+    .card__front {
+      background-color: lightyellow;
+
+      width: 100%;
+      height: 100%;
+
+      // par défaut, la carte sera face cachée, du coup on retourne le côté avec l'image de 180 degrés (1/2 tour).
+      //
+      transform: rotateY(0.5turn);
+
+      // on positionne l'image de façon absolue pour la centrer sur la carte.
+      //
+      .card__front__image {
+        position: absolute;
+
+        // position le coin supérieur gauche de l'image au centre.
+        top: 50%;
+        left: 50%;
+
+        // on recule de la moitié de la hauteur et de la largeur pour que ce soit le centre de l'image qui soit
+        // au centre de la carte
+        //
+        transform: translate(-50%, -50%);
+
+        // On fixe la taille de l'image à la taille d'une des images des sprites contenu dans le fichier cards.png.
+        // On décalera ensuite l'image par multiple de 100px pour afficher l'image que l'on souhaitera parmi les
+        // 18 images disponibles.
+        //
+        width: 100px;
+        height: 100px;
+
+        background: url("./cards.png") no-repeat;
+      }
+    }
+
+    // on positionne le dos de la carte de façon absolue pour qu'elle recouvre la partie image de celle-ci.
+    //
+    .card__back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      background-color: red;
+    }
+  }
+
+  // lorsque l'on veut retourner la carte, on retourne la partie "content" de celle-ci de 180 degrés.
+  //
+  .card__returned {
+    transform: rotateY(0.5turn);
+  }
+}

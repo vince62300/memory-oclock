@@ -1,0 +1,25 @@
+
+// Pour tous les éléments, on supprime les marges et les paddings par défaut.
+//
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  box-sizing: border-box; // on intègre le padding et l'épaisseur de la bordure dans le calcul de la largeur des éléments.
+}
+
+#game {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    margin: 40px;
+  }
+}
