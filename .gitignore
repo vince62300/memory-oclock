@@ -2,3 +2,7 @@
 memory-node-server/node_modules/
 
 memory-node-server/\.idea/
+
+memory-react-client/node_modules/
+
+memory-react-client/\.idea/

@@ -50,7 +50,7 @@ class Board extends React.Component {
       isGameSuspended: false,
       selectedCardIndex: -1, // permet de retenir l'index de la première des 2 cartes retournées.
       cardsSelectedCount: 0, // indique le nombre de cartes sélectionnées.
-      cardsFound: 0, // indique combien de paires de cartes ont été trouvées.
+      cardsFound: 13, // indique combien de paires de cartes ont été trouvées.
 
       progressBarValue: 0 // contient le nombre de millisecondes depuis que la barre de progression a démarré.
     };
@@ -88,7 +88,7 @@ class Board extends React.Component {
     // Dès que le composant est créé, la partie commence.
     // Du coup on lance le timer de 2 minutes (120000ms) qui s'il se déclenche indiquera que la partie est perdue.
     //
-    this.gameTimeOutHandle = setTimeout(this.displayEndGameMessage.bind(this, "Désolé, tu as perdu."), 120000);
+    this.gameTimeOutHandle = setTimeout(this.displayEndGameMessage.bind(this, "Désolé, tu as perdu."), 300000);
 
     //
     // On lance également le timer de mise à jour de la barre de progression.
@@ -213,18 +213,20 @@ class Board extends React.Component {
     // Envoi du temps pour le sauvegarder en base de données si la partie est gagnée.
     //
     if (this.gameWon === true) {
-      fetch('https://httpbin.org/post', {
+      fetch('http://51.83.78.0:4000/add', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({time: this.state.progressBarValue / 100})
+        body: JSON.stringify({temps: this.state.progressBarValue / 1000})
       }).then(res => {
         //
         // retour à la page principale (page des résultats).
         //
-        document.location.href = "/";
+        //document.location.href = "/";
+      }).catch(e => {
+        console.log(e);
       });
     }
   }

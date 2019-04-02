@@ -21,19 +21,26 @@ class Results extends React.Component {
   //
   // Dès que le composant est chargé, on lance la requête à notre serveur pour récupérer les 10 meilleurs scores.
   componentDidMount() {
-    fetch("http://localhost:4000/highest?max=10")
+    fetch("http://51.83.78.0:4000/highest", {method: 'GET', mode: 'cors'})
       .then(response => {
         return response.json();
+      })
+      .catch((e) =>  {
+        console.log(e);
       })
       .then(data => {
         // on récupère, en réponse à la requête, la liste des 10 meilleurs scores que l'on stocke dans notre tableau scores.
         // Comme on modifie une variable de l'objet "state", le composant sera de nouveau rendu avec les scores actualisés.
         //
+        console.log(data);
         this.setState({ scores: data });
       });
   }
 
   render() {
+
+    // Link permet de créer un lien vers la page d'une partie en utilisant le Router React
+    //
     return (
       <div id="results">
         <h2>Meilleurs scores</h2>
@@ -42,7 +49,7 @@ class Results extends React.Component {
             return <li key={item.id}>{item.temps}s</li>;
           })}
         </ul>
-        <Link to="/game">Démarrer une partie</Link> <!-- Link permet de créer un lien vers la page d'une partie en utilisant le Router React -->
+        <Link to="/game">Démarrer une partie</Link>
       </div>
     );
   }

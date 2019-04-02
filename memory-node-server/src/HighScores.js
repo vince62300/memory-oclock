@@ -58,7 +58,7 @@ class HighScores {
   //
   getHighestScores(maxScores) {
     return new Promise((resolve, reject) => {
-      const SELECT_HIGH_SCORES_QUERY = `SELECT * FROM high_results ORDER BY temps DESC LIMIT ${maxScores}`;
+      const SELECT_HIGH_SCORES_QUERY = `SELECT * FROM high_results ORDER BY temps LIMIT ${maxScores}`;
 
       if (this.connection != null) {
         this.connection.query(SELECT_HIGH_SCORES_QUERY, (err, results) => {
